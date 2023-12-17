@@ -51,8 +51,6 @@ case "$SRC_FILE" in
         exit $E_INV_ARG
 esac
 
-cd "$CUR_DIR"
-
 # if compilation fails, script exits because of -e flag
-mv "$TMP_DIR/$DST_FILE" "$CUR_DIR/$DST_FILE"
+mv "$DST_FILE" "$CUR_DIR/$DST_FILE"
 echo "Compilation output: $DST_FILE"
