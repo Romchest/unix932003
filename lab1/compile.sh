@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+CUR_DIR="$PWD"
+
 E_NO_FILE=1
 E_PERM_DENIED=13
 E_INV_ARG=22
@@ -36,16 +38,21 @@ if [ -z "$DST_FILE" ]; then
     exit $E_INV_ARG
 fi
 
+cp "$SRC_FILE" "$TMP_DIR"
+cd "$TMP_DIR"
+
 case "$SRC_FILE" in
     *.cpp)
-        g++ "$SRC_FILE" -o "$TMP_DIR/$DST_FILE" ;;
+        g++ "$SRC_FILE" -o "$DST_FILE" ;;
     *.c)
-        gcc "$SRC_FILE" -o "$TMP_DIR/$DST_FILE" ;;
+        gcc "$SRC_FILE" -o "$DST_FILE" ;;
     *)
         echo "Only C++ and C source files are supported."
         exit $E_INV_ARG
 esac
 
+cd "$CUR_DIR"
+
 # if compilation fails, script exits because of -e flag
-mv "$TMP_DIR/$DST_FILE" "$DST_FILE"
+mv "$TMP_DIR/$DST_FILE" "$CUR_DIR/$DST_FILE"
 echo "Compilation output: $DST_FILE"
