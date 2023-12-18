@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - shared:/shared
+volumes:
+  shared:
