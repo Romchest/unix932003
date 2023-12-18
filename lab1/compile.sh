@@ -38,14 +38,13 @@ if [ -z "$DST_FILE" ]; then
     exit $E_INV_ARG
 fi
 
-cp "$SRC_FILE" "$TMP_DIR"
 cd "$TMP_DIR"
 
 case "$SRC_FILE" in
     *.cpp)
-        g++ "$SRC_FILE" -o "$DST_FILE" ;;
+        g++ "$CUR_DIR/$SRC_FILE" -o "$DST_FILE" ;;
     *.c)
-        gcc "$SRC_FILE" -o "$DST_FILE" ;;
+        gcc "$CUR_DIR/$SRC_FILE" -o "$DST_FILE" ;;
     *)
         echo "Only C++ and C source files are supported."
         exit $E_INV_ARG
